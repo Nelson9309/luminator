@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bulma.css">
+    <link rel="stylesheet" href="iv.css">
     <title>Салон света Люминатор на Фрунзенской набережной</title>
     <style>
         html {
@@ -307,7 +308,27 @@
         </div>
     </footer>
 
+    <script src="js/iv.js"></script>
     <script type="text/javascript">
+	function wrap(el, wrapper) {
+		el.parentNode.insertBefore(wrapper, el);
+		wrapper.appendChild(el);
+	}
+	window.addEventListener('DOMContentLoaded',function(){
+		var elements = document.querySelectorAll(".content_service > img");
+		for (var i = 0; i < elements.length; i++) {
+			var aWrapper = document.createElement("a");
+			aWrapper.setAttribute("href", elements[i].src);
+			aWrapper.setAttribute("class", "js-smartPhoto");
+			aWrapper.setAttribute("data-caption", elements[i].alt);
+			aWrapper.setAttribute("data-group", "gallery");
+			aWrapper.setAttribute("data-id", i);
+			aWrapper.setAttribute("data-index", i);
+
+			wrap(elements[i], aWrapper);
+		}
+		new SmartPhoto(".js-smartPhoto");
+	});
         document.addEventListener('DOMContentLoaded', () => {
             const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
             if ($navbarBurgers.length > 0) {
